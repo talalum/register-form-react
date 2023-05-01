@@ -1,7 +1,7 @@
-import { useForm, SubmitHandler, RegisterOptions, UseFormRegisterReturn } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import "./register-form.scss";
 import { FC } from "react";
-import Input from "../input/input-copm";
+import Input from "../input/input-comp";
 
 type Inputs = {
   firstName: string;
@@ -49,22 +49,24 @@ const RegisterForm: FC = () => {
       <h2>Registeration</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="form">
         {/* <label>First Name</label> */}
-        <input
+        {/* <input
           className="input"
           placeholder="First name"
           {...register("firstName", { required: true, minLength: 2 })}
-        />
+        /> */}
         {/* {errors.firstName && <span>First name is required</span>} */}
 
-        {/* <Input label={"firstName"} register={register} required={false}/> */}
+        <Input label={"firstName"}/>
         {errors.firstName && <span>First name is required</span>}
 
         {/* <label>Last Name</label> */}
-        <input
+        <Input label={"lastName"}/>
+        {errors.lastName && <span>Last name is required</span>}
+        {/* <input
           className="input"
           placeholder="Last name"
           {...register("lastName", { required: true, minLength: 2 })}
-        />
+        /> */}
         {errors.lastName && <span>Last name is required</span>}
         <label>Gender Selection</label>
         <select {...register("gender", { required: true })} className="input">
