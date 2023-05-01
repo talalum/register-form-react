@@ -2,12 +2,14 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import "./register-form.scss";
 import { FC } from "react";
 import Input from "../input/input-comp";
+import Select from "../regular-form/select";
 
 type Inputs = {
   firstName: string;
   lastName: string;
   gender: GenderEnum;
   hobbies: string[];
+  country: string;
   age: number;
   id: number;
 };
@@ -112,6 +114,9 @@ const RegisterForm: FC = () => {
         {errors.id && errors.id.type === "validate" && (
           <div className="error">Invalid ID</div>
         )}
+
+        <Select label="county" {...register("country")} onChange={()=> {console.log("changeeee!");
+        }} options={["12", "13", "14"]}/>
 
         <input type="submit" />
       </form>

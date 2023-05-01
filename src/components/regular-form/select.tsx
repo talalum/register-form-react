@@ -1,17 +1,31 @@
 import React, { forwardRef } from "react";
 
-const selectFunc = (props: React.HTMLProps<HTMLSelectElement>, ref: React.ForwardedRef<HTMLSelectElement>) => {
+type SelectProps = {
+  label: string;
+  options: string[];
+} & React.HTMLProps<HTMLSelectElement>;
+
+const selectFunc = (
+  props: SelectProps,
+  ref: React.ForwardedRef<HTMLSelectElement>
+) => {
+
   return (
     <>
-      <div>Select</div>
+      <label>{props.label}</label>
       <select ref={ref} {...props}>
-        <option value={1}>1</option>
-        <option value={2}>2</option>
-        <option value={3}>3</option>
+        {
+          props.options.map((option, index) => {
+            return <option value={option} key={index}>{option}</option>
+          })
+        }
       </select>
     </>
   );
 };
-const Select = forwardRef<HTMLSelectElement, React.HTMLProps<HTMLSelectElement>>(selectFunc);
+const Select = forwardRef<
+  HTMLSelectElement,
+  { label: string; options: string[] } & React.HTMLProps<HTMLSelectElement>
+>(selectFunc);
 
 export default Select;

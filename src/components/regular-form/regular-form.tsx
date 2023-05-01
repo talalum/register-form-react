@@ -17,7 +17,7 @@ const RegularForm = () => {
       <form onSubmit={clicko}>
         <input type="text" placeholder="name" ref={nameRef} minLength={2} />
         <input type="number" placeholder="age" ref={ageRef} />
-        <Select ref={selectRef} onClick={()=>{console.log("click");}} />
+        <Select ref={selectRef} onClick={()=>{console.log("click");}} label={"hoobies"}  options={["12", "13", "14"]} />
         <input type="submit"/>
       </form>
       <button onClick={sentData}>sent</button>
