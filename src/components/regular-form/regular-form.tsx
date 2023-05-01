@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import Select from "./select";
+import Select from "../select/select";
 
 const RegularForm = () => {
   const clicko = () => console.log("submit");

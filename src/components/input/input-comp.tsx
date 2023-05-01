@@ -1,15 +1,23 @@
-import "./input-comp.scss"
 import React, { forwardRef } from "react";
+import "./input-comp.scss";
 
+type InputProps = {
+  label: string;
+} & React.HTMLProps<HTMLInputElement>;
 
-const inputFunc = (props: React.HTMLProps<HTMLInputElement>, ref: React.ForwardedRef<HTMLInputElement>) => {
+const inputFunc = (
+  props: InputProps,
+  ref: React.ForwardedRef<HTMLInputElement>
+) => {
   return (
     <>
-      <input ref={ref} {...props}/>
+      <label>{props.label}</label>
+      <input ref={ref} {...props} />
     </>
   );
 };
-const Input = forwardRef<HTMLInputElement, React.HTMLProps<HTMLInputElement>>(inputFunc);
+const Input = forwardRef<HTMLInputElement, InputProps>(
+  inputFunc
+);
 
 export default Input;
-

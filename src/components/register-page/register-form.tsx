@@ -2,7 +2,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import "./register-form.scss";
 import { FC } from "react";
 import Input from "../input/input-comp";
-import Select from "../regular-form/select";
+import Select from "../select/select";
 
 type Inputs = {
   firstName: string;
@@ -30,7 +30,7 @@ const RegisterForm: FC = () => {
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
 
   console.log(watch("firstName"));
-  
+
   const isValidIsraeliID = (id: any) => {
     id = id.trim();
     if (id.length > 9 || id.length < 5 || isNaN(id)) return false;
@@ -42,7 +42,9 @@ const RegisterForm: FC = () => {
       Array.from(id, Number).reduce((counter, digit, i) => {
         const step = digit * ((i % 2) + 1);
         return counter + (step > 9 ? step - 9 : step);
-      }) % 10 === 0
+      }) %
+        10 ===
+      0
     );
   };
 
@@ -50,33 +52,11 @@ const RegisterForm: FC = () => {
     <div className="register-form">
       <h2>Registeration</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="form">
-        {/* <label>First Name</label> */}
-        {/* <input
-          className="input"
-          placeholder="First name"
-          {...register("firstName", { required: true, minLength: 2 })}
-        /> */}
-        {/* {errors.firstName && <span>First name is required</span>} */}
-
-        <Input label={"firstName"}/>
+        <Input label={"firstName"} {...register("firstName", { required: true })}  />
         {errors.firstName && <span>First name is required</span>}
-
-        {/* <label>Last Name</label> */}
-        <Input label={"lastName"}/>
+        <Input label={"lastName"} {...register("lastName", { required: true })}  />
         {errors.lastName && <span>Last name is required</span>}
-        {/* <input
-          className="input"
-          placeholder="Last name"
-          {...register("lastName", { required: true, minLength: 2 })}
-        /> */}
-        {errors.lastName && <span>Last name is required</span>}
-        <label>Gender Selection</label>
-        <select {...register("gender", { required: true })} className="input">
-          <option value="">Select gender...</option>
-          <option value="female">female</option>
-          <option value="male">male</option>
-          <option value="other">other</option>
-        </select>
+        <Select {...register("gender", { required: true })}  label={"Gender Selection"} className="input" options = {["female", "male", "other"]}/>
         <label>
           <input {...register("hobbies")} type="checkbox" value="A" />A
         </label>
@@ -86,6 +66,7 @@ const RegisterForm: FC = () => {
         <label>
           <input {...register("hobbies")} type="checkbox" value="C" />C
         </label>
+        
         <label>
           <input {...register("age")} type="radio" value="10" />
           10
@@ -114,10 +95,14 @@ const RegisterForm: FC = () => {
         {errors.id && errors.id.type === "validate" && (
           <div className="error">Invalid ID</div>
         )}
-
-        <Select label="county" {...register("country")} onChange={()=> {console.log("changeeee!");
-        }} options={["12", "13", "14"]}/>
-
+        <Select
+          label="county"
+          {...register("country")}
+          onChange={() => {
+            console.log("changeeee!");
+          }}
+          options={["12", "13", "14"]}
+        />
         <input type="submit" />
       </form>
     </div>
